@@ -302,7 +302,7 @@ def evalMDH(mdh_blob, version):
     return mdh, mask
 
 
-def mapVBVD(filename, quiet=False, **kwargs):
+def mapVBVD(filename, quiet=False, flag_return_mdh=False, **kwargs):
     if not quiet:
         print(f'pymapVBVD version {pkg.__version__}')
 
@@ -364,6 +364,7 @@ def mapVBVD(filename, quiet=False, **kwargs):
     #      ima, ref,... scan
     #   2) reading the data
     twix_obj = []
+    mdh_obj = []
 
     for s in range(NScans):
         cPos = measOffset[s]
@@ -547,12 +548,16 @@ def mapVBVD(filename, quiet=False, **kwargs):
                         currTwixObj[keys].clean()
 
         twix_obj.append(myAttrDict(currTwixObj))
+        mdh_obj.append(mdh)
 
     fid.close()
 
     if len(twix_obj) == 1:
         twix_obj = twix_obj[0]
+        mdh_obj = mdh_obj[0]
     # breakpoint()
+    if flag_return_mdh:
+        return twix_obj, mdh_obj
     return twix_obj
 
 
