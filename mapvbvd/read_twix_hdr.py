@@ -1,6 +1,9 @@
 import re
 import numpy as np
-from scipy.integrate import cumtrapz
+try:
+    from scipy.integrate import cumtrapz
+except ImportError:
+    from scipy.integrate import cumulative_trapezoid
 
 from mapvbvd._attrdict import AttrDict
 
