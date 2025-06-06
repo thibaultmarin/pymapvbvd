@@ -135,7 +135,7 @@ def loop_mdh_read(fid, version, Nscans, scan, measOffset, measLength, print_prog
         tmp = data_u8[dmaIdx]
         tmp.dtype = np.uint16
         NCol_NCha = tmp  # was float [ushSamplesInScan  ushUsedChannels]
-        ulDMALength = dmaOff + (8 * NCol_NCha[0] + dmaSkip) * NCol_NCha[1]
+        ulDMALength = dmaOff + (8 * int(NCol_NCha[0]) + dmaSkip) * int(NCol_NCha[1])
 
         n_acq = n_acq + 1
 
